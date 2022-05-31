@@ -1,49 +1,21 @@
 #!/bin/bash
 # Automate School work Assignments
 ls -l
-# NB: Bash header files have been written already
-# 1
-echo "whoami" >> 1-who_am_i
-cat 1-who_am_i
-#2
-echo "groups" >> 2-groups
-cat 2-groups
-#3
-echo "sudo chown betty hello" >> 3-new_owner
-cat 3-new_owner
-#4
-echo "touch hello" >> 4-empty
-cat 4-empty
-#5
-echo "chmod 764 hello" >> 5-execute
-cat 5-execute
-#6
-echo "chmod 544 hello" >> 6-multiple_permissions
-cat 6-multiple_permissions
-#7
-echo "chmod 751 hello" >> 7-everybody
-cat 7-everybody
-#8
-echo "chmod 007 hello" >> 8-James_Bond
-cat 8-James_Bond
-#9
-echo "chmod 752 hello" >> 9-John_Doe
-cat 9-John_Doe
-#10
-echo "chmod 664 hello" >> 10-mirror_permissions
-cat 10-mirror_permissions
-#11
-echo "chmod +111 */" >> 11-directories_permissions
-cat 11-directories_permissions
-#12
-echo "mkdir -m 751 my_dir" >> 12-directory_permissions
-cat 12-directory_permissions
-#13
-echo "chgrp school hello" >> 13-change_group
-cat 13-change_group
+# variable
+filename="12-newest_files" 
+
+#Header
+echo '#!/bin/bash' > $filename
+#2 program
+echo 'ls -t | head -'  >> $filename
+
+#view contents of filename
+cat $filename
+
 #git add, commit and push to remote
-git add .
-git commit -m 'Submit remaining 13 mandatory tasks'
+git add $filename
+git commit -m 'Submit task 12'
 git push
 git status
+
 
