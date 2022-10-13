@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# script that gives you information about the school file
+flag_1=$(find . -name "school" | wc -l)
+flag_2=$(find . -name  "school" -empty -type b,c,d,p,l | wc -l)
+flag_3=$(find . -name "school" -empty -type f | wc -l)
+flag_4=$(find . -name "school" -type f | wc -l)
+if [ "$flag_1" -gt 0 ]
+then
+	echo "school file exists"
+	if [ "$flag_2" -gt 0 ]
+	then
+		echo "school file is not empty"
+	elif [ "$flag_3" -gt 0 ]
+	then
+		echo "school file is empty"
+		echo "school is a regular file"
+	elif [ "$flag_4" -gt 0 ]
+	then
+		echo "school file is not empty"
+		echo "school is a regular file"
+	else
+		echo
+	fi
+
+else
+	echo "school file does not exist"
+fi
