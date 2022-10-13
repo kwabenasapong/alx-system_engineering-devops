@@ -2,5 +2,5 @@
 # A script that contents of current one file per line
 for ((i =0; i < 1; i++))
 do
-	find ./ -type f -printf "%f\n" | cut -b 3-
+	find ./ -type f -printf "%f\n" | cut -f 2- -d '-'
 done
