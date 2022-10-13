@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# A script that displays numbers from 1 to 100
+
+for i in {1..100}
+do
+	flag_3=$((i % 3))
+	flag_5=$((i % 5))
+	flag_15=$((i % 15))
+	if [ "$flag_15" -eq 0 ]
+	then
+		echo "FizzBuzz"
+	elif [ "$flag_5" -eq 0 ]
+	then
+		echo "Buzz"
+	elif [ "$flag_3" -eq 0 ]
+	then
+		echo "Fizz"
+	else
+		echo $i
+	fi
+done
