@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# script loops from 1 to 20, echo different @ 4, 9 and 17
+count=1
+while [ $count -lt 21 ];
+do
+	if [ "$count" -eq 4 ]
+	then
+		echo $count
+		echo "bad luck from china"
+	elif [ "$count" -eq 9 ]
+	then
+		echo $count
+		echo "bad luck from Japan"
+	elif [ "$count" -eq 17 ]
+	then
+		echo $count
+		echo "bad luck from Italy"
+	else
+		echo $count
+	fi
+	((count++))
+done
