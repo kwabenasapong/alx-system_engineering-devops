@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 # script that displays a list of currently running processes
-ps -C bash -o pid= -o comm=
+# Alternative ps -C bash -o pid= -o comm=
+pgrep -l bash
