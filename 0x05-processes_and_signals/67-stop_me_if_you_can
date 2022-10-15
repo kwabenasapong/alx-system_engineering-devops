@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# script terminates current running process of task 4
+cmd=$(ps -H -C 'bash ./7-highlander' -o pid)
+for pid in $cmd
+do
+	echo "$pid" > file
+done
+kill -s SIGTERM "$pid"
