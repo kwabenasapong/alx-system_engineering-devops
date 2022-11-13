@@ -4,6 +4,6 @@
 # 	localhost resolves to 127.0.0.2
 # 	facebook.com resolves to 8.8.8.8
 #	running this for docker so check this out-> http://blog.jonathanargentiero.com/docker-sed-cannot-rename-etcsedl8ysxl-device-or-resource-busy/
-cp /etc/hosts ~/hosts.new
+sudo cp /etc/hosts ~/hosts.new
 sed -i 's/127.*$/127.0.0.2	localhost\n8.8.8.8	facebook.com/' ~/hosts.new
-cp -f ~/hosts.new /etc/hosts
+sudo cp -f ~/hosts.new /etc/hosts
