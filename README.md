@@ -1,2 +1,1 @@
-# alx-system_engineering-devops
-For presenting my course work at ALX
+alx-system_devops projects
