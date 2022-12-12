@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+#income to server via ssh
+ssh -i ~/.ssh/school ubuntu@34.232.68.81
