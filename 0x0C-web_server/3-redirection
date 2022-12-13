@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Redirect a page
+sudo service nginx stop
+new_config="location /redirect_me {\n\treturn 301 \$scheme://\$host_name;\n}\n"
+sudo sed -i "s/#_change_line/$new_config/" /etc/nginx/sites-enabled/default
+sudo service nginx start
