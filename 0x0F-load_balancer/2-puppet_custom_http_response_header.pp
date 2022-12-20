@@ -15,6 +15,6 @@ exec {'sudo sed -i "s/server_name _;/server_name _;\n\n\tadd_header X-Served-By 
 }
 
 exec {'run':
-  command  => 'sudo service nginx restart',
+  command  => 'sudo service nginx restart'; 'sudo update-rc.d haproxy defaults',
   provider => shell,
 }
