@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# instructions to setup master and replica mysql servers
+master=34.232.68.81
+replica=54.198.29.36
+web1=$(ssh ubuntu@$master)
+#cmd1=$(sudo ufw allow from "$replica" to any port 3306)
+#cmd1_1=$(sudo ufw reload)
+file_path=$(/etc/mysql/mysql.conf.d/mysqld.cnf)
+file_log_bin=$(/var/log/mysql/mysql-bin.log)
+cmd2=$(sudo sed -i "s/127.0.0.1/$master/" "$file_path")
+cmd3=$(sudo sed -i "38i server-id\t= 1" "$file_path")
+cmd4=$(sudo sed -i "39i log_bin\t= $file_log_bin" "$file_path")
+cmd5=$(sudo sed -i "40i binlog_do_db\t= tyrell_corp" "$file_path")
+for cmd in $cmd2 $cmd3 $cmd4 $cmd5; do
+	"$web1" -t "$cmd";
+	cat "$file_path"
+done
+sudo systemctl restart mysql
+echo "-- unlocks status and locks tables
+FLUSH TABLES WITH READ LOCK;
+SHOW MASTER STATUS;" | sudo tee check_status.sql
+scp check_status.sql ubuntu@"$master":~/
+"$web1" -t "sudo cat check_status.sql | sudo mysql"
+"$web1" -t "sudo mysqldump -u root tyrell_corp > tyrell_corp.sql"
+echo "-- unlock tables
+use tyrell_corp;
+unlock tables;" | sudo tee unlock_db.sql
+scp unlock_db.sql ubuntu@"$master":~/
+"$web1" -t "sudo cat unlock.sql | sudo mysql"
+"$web1" -t "sudo scp tyrell_corp.sql ubuntu@$replica:/tmp/"
+

@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# generates a MySQL dump and creates a compressed archive out of it
+: 'simpler implementation
+date=$(date +%d-%m-%Y)
+mysqldump -u root -p "$1" --all-databases > backup.sql
+tar -zcvf "$date.tar.gz" backup.sql
+sudo rm backup.sql
+echo "MySQL dump and compression completedi"
+'
+
+# Get the current date
+date=$(date +%d-%m-%Y)
+
+# Dump all databases
+if mysqldump -u root -p"$1" --all-databases > backup.sql; then
+  # Compress the dump into a tar.gz archive
+  if tar -zcvf "$date.tar.gz" backup.sql; then
+    # Remove the original dump file
+    rm backup.sql
+    echo "MySQL dump and compression completed successfully."
+  else
+    echo "Error: Compression of dump failed."
+  fi
+else
+  echo "Error: MySQL dump failed."
+fi
+
