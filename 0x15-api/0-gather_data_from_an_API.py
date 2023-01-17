@@ -1,36 +1,38 @@
 #!/usr/bin/python3
+"""Retrieve a specific user and their to-dos from the JSONPlaceholder API
+and display the employee's to-do list progress in the requested format.
+"""
+
 import requests
 import sys
 
 if __name__ == "__main__":
-    # get the user id from the command line argument
+    # Get the user id from the command line argument
     u_id = sys.argv[1]
 
-    ''' send a GET request to the API to retrieve
-    information about the user with the provided id
-    '''
     try:
+        # Send a GET request to the API to retrieve user information
         user_response = requests.\
-                get(f'https://jsonplaceholder.typicode.com/users/{u_id}')
-        # check if the response status code is 200 (OK)
+            get(f'https://jsonplaceholder.typicode.com/users/{u_id}')
         user_response.raise_for_status()
-        # get the user information in json format
         user = user_response.json()
+        user_name = user.get('name')
+        if user_name is None:
+            raise ValueError(f"No user found with id {u_id}")
+
+        # Send a GET request to the API to retrieve todo information
         todos_response = requests.\
             get(f'https://jsonplaceholder.typicode.com/todos?userId={u_id}')
-        # check if the response status code is 200 (OK)
         todos_response.raise_for_status()
-        # get the todos information in json format
         todos = todos_response.json()
 
         completed_tasks = [task for task in todos if task['completed']]
         total_tasks = len(todos)
         done_tasks = len(completed_tasks)
-        print(f"Employee {user.get('name')} is done with \
-            tasks({done_tasks}/{total_tasks}):")
+        print(f"Employee {user_name} is done with tasks\
+            ({done_tasks}/{total_tasks}):")
         for task in completed_tasks:
             print(f"\t{task['title']}")
-
     except requests.exceptions.HTTPError as http_err:
         print(f'HTTP error occured: {http_err}')
     except requests.exceptions.ConnectionError as conn_err:
