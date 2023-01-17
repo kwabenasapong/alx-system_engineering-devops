@@ -25,7 +25,7 @@ try:
     completed_tasks = [task for task in todos if task['completed']]
     total_tasks = len(todos)
     done_tasks = len(completed_tasks)
-    print(f"Employee {user['name']} is done with \
+    print(f"Employee {user.get('name')} is done with \
             tasks({done_tasks}/{total_tasks}):")
     for task in completed_tasks:
         print(f"\t{task['title']}")
