@@ -29,7 +29,8 @@ if __name__ == "__main__":
         completed_tasks = [task for task in todos if task['completed']]
         total_tasks = len(todos)
         done_tasks = len(completed_tasks)
-        print(f"Employee {user_name} is done with tasks({done_tasks}/{total_tasks}):")
+        print("Employee {} is done with tasks({}/{}):".format(
+            user_name, done_tasks, total_tasks))
         for task in completed_tasks:
             print(f"\t{task['title']}")
     except requests.exceptions.HTTPError as http_err:
