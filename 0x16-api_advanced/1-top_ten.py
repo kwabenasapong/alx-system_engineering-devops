@@ -25,7 +25,7 @@ def top_ten(subreddit):
     query_response = requests.get(url, headers=headers)
 
     if query_response.status_code != 200:
-        return 0
+        return None
     else:
         query = query_response.json()
         i = 0
