@@ -4,7 +4,7 @@ $file_to_edit = '/etc/nginx/nginx.conf'
 
 
 exec { 'change_line_in_file':
-  command => "sed -i '2s/4/auto/' ${file_to_edit}",
+  command => "sed -i '2s/4/5000/' ${file_to_edit}",
   path    => ['/bin','/usr/bin']
 }
 
