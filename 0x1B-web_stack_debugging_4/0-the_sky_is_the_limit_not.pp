@@ -10,8 +10,7 @@ exec { 'change_line_in_file':
 
 exec { 'restart_nginx':
   command     => 'systemctl restart nginx',
-  path        => ['/bin','/usr/bin'],
-  refreshonly => true,
+  path        => ['/bin','/usr/bin']
 }
 
 Exec['change_line_in_file'] -> Exec['restart_nginx']
