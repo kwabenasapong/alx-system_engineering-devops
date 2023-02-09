@@ -8,7 +8,7 @@ exec { 'change_line_in_file':
   path    => ['/bin','/usr/bin']
 }
 
-exec { 'restart_nginx':
-  command     => 'systemctl restart nginx',
-  path        => ['/bin','/usr/bin']
+exec { 'nginx-restart':
+  command => 'nginx restart',
+  path    => '/etc/init.d/'
 }
